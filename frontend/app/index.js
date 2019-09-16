@@ -205,30 +205,30 @@ function draw() {
   soundButton.render()
 }
 
-// Handle Canvas Resize
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight)
+// // Handle Canvas Resize
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight)
 
-  width = window.innerWidth
-  height = window.innerHeight
+//   width = window.innerWidth
+//   height = window.innerHeight
 
-  // How much of the screen should the game take, this should usually be left as it is
-  let sizeModifier = 0.75
-  if (height > width) {
-    sizeModifier = 1
-  }
+//   // How much of the screen should the game take, this should usually be left as it is
+//   let sizeModifier = 0.75
+//   if (height > width) {
+//     sizeModifier = 1
+//   }
 
-  // Magically determine basic object size depending on size of the screen
-  objSize = floor(
-    min(floor(width / gameSize), floor(height / gameSize)) * sizeModifier
-  )
+//   // Magically determine basic object size depending on size of the screen
+//   objSize = floor(
+//     min(floor(width / gameSize), floor(height / gameSize)) * sizeModifier
+//   )
 
-  soundButton.size = createVector(objSize, objSize)
+//   soundButton.size = createVector(objSize, objSize)
 
-  isMobileSize = detectMobileSize()
+//   isMobileSize = detectMobileSize()
 
-  // handleResize() // 👈 create this function for advanced resize handling
-}
+//   // handleResize() // 👈 create this function for advanced resize handling
+// }
 
 /**
  * Go through objects and see which ones need to be removed
