@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
@@ -23,6 +24,7 @@ let movingArc
 let player
 
 // Game Stuffs (READ-N-WRITE)
+let circleRadius
 
 // Buttons
 let playButton
@@ -43,6 +45,7 @@ let comboTexts = []
 // Images
 let imgPlayer
 let imgLife
+let imgExplosion
 let imgBackground
 
 // Audio
@@ -101,6 +104,7 @@ function preload() {
 
   // Load images
   imgPlayer = loadImage(Koji.config.images.player) // mario
+  imgExplosion = loadImage(Koji.config.images.explosion)
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
@@ -138,7 +142,7 @@ function preload() {
 
 // Instantiate objects here
 function instantiate() {
-  const circleRadius = objSize * (isMobileSize ? 8 : 10)
+  circleRadius = objSize * (isMobileSize ? 8 : 10)
   visibleCircle = new GameObject(
     { x: width / 2, y: height / 2 },
     { radius: circleRadius },
@@ -147,15 +151,15 @@ function instantiate() {
   movingArc = new Arc(
     { x: width / 2, y: height / 2 },
     {
-      width: circleRadius * 2,
-      height: circleRadius * 2,
+      width: circleRadius * 2 + circleRadius * 0.015,
+      height: circleRadius * 2 + circleRadius * 0.015,
       startRadian: 90 - 30,
       stopRadian: 90 + 30,
     },
     { stroke: 5, strokeColor: Koji.config.colors.arcColor }
   )
 
-  player = new GameObject(
+  player = new Player(
     { x: width / 2, y: height / 2 },
     { radius: circleRadius * 0.175 },
     { shape: 'circle', image: imgPlayer, rotate: true }
@@ -238,11 +242,14 @@ function draw() {
  * A good practive would be for objects to have a boolean like removable, and here you would go through all objects and remove them if they have removable = true;
  */
 function cleanup() {
-  // eslint-disable-next-line no-plusplus
   for (let i = 0; i < floatingTexts.length; i++) {
     if (floatingTexts[i].timer <= 0) {
       floatingTexts.splice(i, 1)
     }
+  }
+
+  if (player.isRemovable) {
+    player = null
   }
 }
 
@@ -390,5 +397,14 @@ function init() {
   setTimeout(() => {
     score = 0
     gameStart = true
+
+    particlesEffect(
+      imgExplosion,
+      {
+        x: player.body.position.x,
+        y: player.body.position.y,
+      },
+      15
+    )
   }, 1000)
 }

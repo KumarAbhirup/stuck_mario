@@ -1,7 +1,7 @@
 {
   "colors": {
     "backgroundColor": "#0a0a31",
-    "circleColor": "#ff000040",
+    "circleColor": "#00000040",
     "arcColor": "#ffffff",
     "textColor": "#ffffff",
     "playButtonTextColor": "#0a0a31",

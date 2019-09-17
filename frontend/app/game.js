@@ -4,14 +4,6 @@
 
 // This function runs when the Game Screen is ON
 function gamePlay() {
-  // Particle effects
-  for (let i = 0; i < particles.length; i += 1) {
-    if (particles[i]) {
-      particles[i].render()
-      particles[i].update()
-    }
-  }
-
   // Draw Timer! (Comment this blob of code if you don't want timer)
   if (Koji.config.strings.enableTimer && gameTimerEnabled) {
     gameTimer -= 1 / frameRate()
@@ -21,6 +13,15 @@ function gamePlay() {
   // InGame UI
   visibleCircle.show()
   movingArc.show()
+
+  // Particle effects
+  for (let i = 0; i < particles.length; i += 1) {
+    if (particles[i]) {
+      particles[i].render()
+      particles[i].update()
+    }
+  }
+
   player.show()
 
   if (gameStart) {
@@ -28,8 +29,8 @@ function gamePlay() {
     movingArc.sizing.startRadian -= 3.5 * movingArc.moveDir
     movingArc.sizing.stopRadian -= 3.5 * movingArc.moveDir
 
-    // Rotate the player
-    player.rotate(undefined, -0.15)
+    // Manage Player movement
+    player.update()
   }
 
   // Score draw
