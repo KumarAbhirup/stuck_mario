@@ -1,6 +1,8 @@
 {
   "colors": {
     "backgroundColor": "#0a0a31",
+    "circleColor": "#ff000040",
+    "arcColor": "#ffffff",
     "textColor": "#ffffff",
     "playButtonTextColor": "#0a0a31",
     "playButtonColor": "#ffda5a",
@@ -28,6 +30,16 @@
     "fields": [{
         "key": "backgroundColor",
         "name": "Background color",
+        "type": "color"
+      },
+      {
+        "key": "circleColor",
+        "name": "Circle Color",
+        "type": "color"
+      },
+      {
+        "key": "arcColor",
+        "name": "Arc Color",
         "type": "color"
       },
       {

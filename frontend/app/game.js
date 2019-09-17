@@ -24,6 +24,8 @@ function gamePlay() {
   }
 
   // InGame UI
+  visibleCircle.show()
+  movingArc.show()
 
   // Score draw
   const scoreX = width - objSize / 2

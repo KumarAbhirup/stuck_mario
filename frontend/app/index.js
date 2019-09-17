@@ -18,6 +18,8 @@ let floatingTexts = []
 let particles = []
 
 // Game Objects (READ-ONLY)
+let visibleCircle
+let movingArc
 
 // Game Stuffs (READ-N-WRITE)
 
@@ -132,7 +134,24 @@ function preload() {
 }
 
 // Instantiate objects here
-function instantiate() {}
+function instantiate() {
+  const circleRadius = objSize * (isMobileSize ? 8 : 10)
+  visibleCircle = new GameObject(
+    { x: width / 2, y: height / 2 },
+    { radius: circleRadius },
+    { shape: 'circle', color: Koji.config.colors.circleColor }
+  )
+  movingArc = new Arc(
+    { x: width / 2, y: height / 2 },
+    {
+      width: circleRadius * 2,
+      height: circleRadius * 2,
+      startRadian: radians(90 - 30),
+      stopRadian: radians(90 + 30),
+    },
+    { stroke: 5, strokeColor: Koji.config.colors.arcColor }
+  )
+}
 
 // Setup your props
 function setup() {
@@ -204,31 +223,6 @@ function draw() {
 
   soundButton.render()
 }
-
-// // Handle Canvas Resize
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight)
-
-//   width = window.innerWidth
-//   height = window.innerHeight
-
-//   // How much of the screen should the game take, this should usually be left as it is
-//   let sizeModifier = 0.75
-//   if (height > width) {
-//     sizeModifier = 1
-//   }
-
-//   // Magically determine basic object size depending on size of the screen
-//   objSize = floor(
-//     min(floor(width / gameSize), floor(height / gameSize)) * sizeModifier
-//   )
-
-//   soundButton.size = createVector(objSize, objSize)
-
-//   isMobileSize = detectMobileSize()
-
-//   // handleResize() // 👈 create this function for advanced resize handling
-// }
 
 /**
  * Go through objects and see which ones need to be removed
@@ -357,7 +351,7 @@ function init() {
   floatingTexts.push(
     new OldFloatingText(
       width / 2,
-      height / 2 - height * 0.01,
+      height / 2,
       Koji.config.strings.gameStartedFloatingText,
       Koji.config.colors.floatingTextColor,
       objSize * 1.2,
