@@ -20,6 +20,7 @@ let particles = []
 // Game Objects (READ-ONLY)
 let visibleCircle
 let movingArc
+let player
 
 // Game Stuffs (READ-N-WRITE)
 
@@ -40,6 +41,7 @@ let score = 0
 let comboTexts = []
 
 // Images
+let imgPlayer
 let imgLife
 let imgBackground
 
@@ -98,6 +100,7 @@ function preload() {
   }
 
   // Load images
+  imgPlayer = loadImage(Koji.config.images.player) // mario
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
@@ -146,10 +149,16 @@ function instantiate() {
     {
       width: circleRadius * 2,
       height: circleRadius * 2,
-      startRadian: radians(90 - 30),
-      stopRadian: radians(90 + 30),
+      startRadian: 90 - 30,
+      stopRadian: 90 + 30,
     },
     { stroke: 5, strokeColor: Koji.config.colors.arcColor }
+  )
+
+  player = new GameObject(
+    { x: width / 2, y: height / 2 },
+    { radius: circleRadius * 0.175 },
+    { shape: 'circle', image: imgPlayer, rotate: true }
   )
 }
 
@@ -320,11 +329,26 @@ function keyPressed() {
         )
       }
     }
+
+    // Key controls
+    if (keyCode === LEFT_ARROW || key === 'a') {
+      movingArc.moveDir = -1 // left
+    }
+    if (keyCode === RIGHT_ARROW || key === 'd') {
+      movingArc.moveDir = 1 // right
+    }
   }
 }
 
 function keyReleased() {
   if (!gameOver && !gameBeginning) {
+    if ((keyCode === LEFT_ARROW || key === 'a') && movingArc.moveDir === -1) {
+      movingArc.moveDir = 0
+    }
+
+    if ((keyCode === RIGHT_ARROW || key === 'd') && movingArc.moveDir === 1) {
+      movingArc.moveDir = 0
+    }
   }
 }
 
@@ -351,7 +375,7 @@ function init() {
   floatingTexts.push(
     new OldFloatingText(
       width / 2,
-      height / 2,
+      height / 2 - height * 0.2,
       Koji.config.strings.gameStartedFloatingText,
       Koji.config.colors.floatingTextColor,
       objSize * 1.2,

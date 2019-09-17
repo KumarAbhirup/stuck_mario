@@ -17,6 +17,7 @@
   strokeWeight
   noFill
   noStroke
+  radians
 */
 
 class Arc {
@@ -38,6 +39,8 @@ class Arc {
     this.sizing = sizing
     this.settings = settings
   }
+
+  moveDir = 0 // 0 not moving, -1 left, 1 for right.
 
   show() {
     push()
@@ -98,8 +101,8 @@ class Arc {
       null,
       this.sizing.width,
       this.sizing.height,
-      this.sizing.startRadian,
-      this.sizing.stopRadian,
+      radians(this.sizing.startRadian),
+      radians(this.sizing.stopRadian),
       this.settings.mode
     )
     pop()
