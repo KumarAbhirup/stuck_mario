@@ -27,6 +27,9 @@ function gamePlay() {
     // Move the arc by arrow keys
     movingArc.sizing.startRadian -= 3.5 * movingArc.moveDir
     movingArc.sizing.stopRadian -= 3.5 * movingArc.moveDir
+
+    // Rotate the player
+    player.rotate(undefined, -0.15)
   }
 
   // Score draw
