@@ -23,11 +23,10 @@ function gamePlay() {
   }
 
   player.show()
+  movingArc.update()
 
   if (gameStart) {
-    // Move the arc by arrow keys
-    movingArc.sizing.startRadian -= 3.5 * movingArc.moveDir
-    movingArc.sizing.stopRadian -= 3.5 * movingArc.moveDir
+    movingArc.revolveAngle -= 3.5 * movingArc.moveDir
 
     // Manage Player movement
     player.update()

@@ -221,9 +221,11 @@ class GameObject {
   }
 
   // Rotate the object
-  rotate(degrees, rotateSpeed = 0.1) {
+  rotate(degrees, rotateSpeed = 0.1, mode = 'auto') {
     const effectiveDegrees =
-      degrees || (this.rotateStartAt = this.rotateStartAt + rotateSpeed)
+      mode === 'degrees'
+        ? degrees
+        : (this.rotateStartAt = this.rotateStartAt + rotateSpeed)
     this.body.angle = effectiveDegrees
   }
 

@@ -20,6 +20,7 @@ class GameContainer extends Component {
     require('script-loader!app/components/object.js')
     require('script-loader!app/components/arc.js')
     require('script-loader!app/components/player.js')
+    require('script-loader!app/components/mover.js')
 
     // Library
     require('script-loader!app/lib/clickable.js')

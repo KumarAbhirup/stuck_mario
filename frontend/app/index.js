@@ -148,16 +148,26 @@ function instantiate() {
     { radius: circleRadius },
     { shape: 'circle', color: Koji.config.colors.circleColor }
   )
-  movingArc = new Arc(
-    { x: width / 2, y: height / 2 },
+  movingArc = new Mover(
     {
-      width: circleRadius * 2 + circleRadius * 0.015,
-      height: circleRadius * 2 + circleRadius * 0.015,
-      startRadian: 90 - 30,
-      stopRadian: 90 + 30,
+      // not needed, set in draw function
+      x: null,
+      y: null,
     },
-    { stroke: 5, strokeColor: Koji.config.colors.arcColor }
+    {
+      width: circleRadius * 0.5,
+      height: objSize * 0.2,
+    },
+    { shape: 'rectangle', color: Koji.config.colors.arcColor, rotate: true }
   )
+
+  // set moving arc postion
+  movingArc.body.position.x =
+    visibleCircle.body.position.x +
+    cos(radians(movingArc.revolveAngle)) * visibleCircle.sizing.radius
+  movingArc.body.position.y =
+    visibleCircle.body.position.y +
+    sin(radians(movingArc.revolveAngle)) * visibleCircle.sizing.radius
 
   player = new Player(
     { x: width / 2, y: height / 2 },
