@@ -16,6 +16,7 @@
   p5
   movingArc
   createVector
+  loseLife
 */
 
 class Player extends GameObject {
@@ -49,6 +50,7 @@ class Player extends GameObject {
       this.isRemovable = true
       this.isStartPosition = true
       this.reload()
+      loseLife()
     }
   }
 

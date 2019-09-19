@@ -39,18 +39,20 @@ function gamePlay() {
       )
     ) {
       player.isStartPosition = false
+
       player.dir = p5.Vector.sub(
         player.body.position,
         movingArc.body.position
       ).normalize()
 
-      particlesEffect(
+      addScore(
+        1,
         imgLife,
         {
           x: player.body.position.x,
           y: player.body.position.y,
         },
-        20
+        6
       )
     }
 
