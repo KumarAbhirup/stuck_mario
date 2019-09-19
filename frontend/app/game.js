@@ -28,6 +28,32 @@ function gamePlay() {
   if (gameStart) {
     movingArc.revolveAngle -= 3.5 * movingArc.moveDir
 
+    // Collision
+    if (
+      player.didTouch(
+        {
+          sizing: movingArc.sizing,
+          body: movingArc.body,
+        },
+        'rectangle'
+      )
+    ) {
+      player.isStartPosition = false
+      player.dir = p5.Vector.sub(
+        player.body.position,
+        movingArc.body.position
+      ).normalize()
+
+      particlesEffect(
+        imgLife,
+        {
+          x: player.body.position.x,
+          y: player.body.position.y,
+        },
+        20
+      )
+    }
+
     // Manage Player movement
     player.update()
   }

@@ -252,9 +252,17 @@ function draw() {
  * A good practive would be for objects to have a boolean like removable, and here you would go through all objects and remove them if they have removable = true;
  */
 function cleanup() {
+  // Cleanup FloatingText
   for (let i = 0; i < floatingTexts.length; i++) {
     if (floatingTexts[i].timer <= 0) {
       floatingTexts.splice(i, 1)
+    }
+  }
+
+  // Cleanup particles
+  for (let i = 0; i < particles.length; i++) {
+    if (particles[i].removable) {
+      particles.splice(i, 1)
     }
   }
 

@@ -13,33 +13,41 @@
   imgExplosion
   Ease
   EasingFunctions
+  p5
+  movingArc
+  createVector
 */
 
 class Player extends GameObject {
   isRemovable = false
 
-  velocity = 0
+  startVelocity = 0
 
   maxVelocity = 200
 
+  velocity = createVector(1, 1)
+
   bounceDirection = null
+
+  isStartPosition = true
+
+  isProjecting = false
+
+  dir = p5.Vector.sub(this.body.position, movingArc.body.position).normalize()
 
   update() {
     this.rotate(undefined, -0.15)
 
-    // this.velocity = Smooth(this.velocity, this.maxVelocity, 500)
-    // this.body.position.y += this.velocity * 0.8
-
-    this.body.position.y = Ease(
-      EasingFunctions.easeOutCubic,
-      4,
-      this.body.position.y,
-      this.body.position.y,
-      1000
-    )
+    if (this.isStartPosition) {
+      this.body.position.x += this.dir.x * -4
+      this.body.position.y += this.dir.y * -4
+    } else {
+      this.project()
+    }
 
     if (this.wentOutOfFrame()) {
       this.isRemovable = true
+      this.isStartPosition = true
       this.reload()
     }
   }
@@ -64,11 +72,10 @@ class Player extends GameObject {
 
   // Here's how the bounce is done
   project() {
-    if (this.bounceDirection === 'left') {
-      this.body.position.x -= 20
-    }
-    if (this.bounceDirection === 'right') {
-      this.body.position.x += 20
-    }
+    this.velocity.x = this.dir.x * this.velocity.x
+    this.velocity.y = this.dir.y * this.velocity.y
+
+    this.body.position.x += this.dir.x * 4
+    this.body.position.y += this.dir.y * 4
   }
 }
