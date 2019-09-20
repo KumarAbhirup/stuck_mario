@@ -44,6 +44,7 @@ let comboTexts = []
 
 // Images
 let imgPlayer
+let imgMoon
 let imgLife
 let imgExplosion
 let imgBackground
@@ -104,6 +105,7 @@ function preload() {
 
   // Load images
   imgPlayer = loadImage(Koji.config.images.player) // mario
+  imgMoon = loadImage(Koji.config.images.planet) // moon in this case
   imgExplosion = loadImage(Koji.config.images.explosion)
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
@@ -157,8 +159,14 @@ function instantiate() {
     {
       width: circleRadius * 0.5,
       height: objSize * 0.2,
+      radius: circleRadius * 0.25,
     },
-    { shape: 'rectangle', color: Koji.config.colors.arcColor, rotate: true }
+    {
+      shape: 'circle',
+      color: Koji.config.colors.arcColor,
+      image: imgMoon,
+      rotate: true,
+    }
   )
 
   // set moving arc postion

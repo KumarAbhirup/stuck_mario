@@ -37,7 +37,7 @@ class Player extends GameObject {
   dir = p5.Vector.sub(this.body.position, movingArc.body.position).normalize()
 
   update() {
-    this.rotate(undefined, -0.15)
+    this.rotate(undefined, -5)
 
     if (this.isStartPosition) {
       this.body.position.x += this.dir.x * -4
@@ -50,7 +50,7 @@ class Player extends GameObject {
       this.isRemovable = true
       this.isStartPosition = true
       this.reload()
-      // loseLife()
+      loseLife()
     }
   }
 
