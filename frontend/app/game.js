@@ -66,28 +66,12 @@ function gamePlay() {
         )
       ) {
         if (collisionTimer > 0.22) {
-          addScore(
-            1,
-            imgLife,
-            {
-              x: player.body.position.x,
-              y: player.body.position.y,
-            },
-            4
-          )
-
           collisionTimer = 0
+          celebrations()
         }
-      } else if (collisionTimer > 0.01) {
-        addScore(
-          1,
-          imgLife,
-          {
-            x: player.body.position.x,
-            y: player.body.position.y,
-          },
-          4
-        )
+      } else if (collisionTimer > 0.0155) {
+        collisionTimer = 0
+        celebrations()
       }
     }
 

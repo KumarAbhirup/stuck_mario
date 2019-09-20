@@ -76,6 +76,19 @@ function particlesEffect(
   }
 }
 
+function celebrations() {
+  addScore(
+    1,
+    imgLife,
+    {
+      x: player.body.position.x,
+      y: player.body.position.y,
+    },
+    Math.floor(random(7, 12)),
+    { floatingText: false }
+  )
+}
+
 // Used to go to submit score page
 function submitScore(currentScore) {
   window.setScore(currentScore)
