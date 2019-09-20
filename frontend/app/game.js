@@ -36,6 +36,17 @@ function gamePlay() {
       movingArc.revolveAngle -= 6 * movingArc.moveDir
     }
 
+    // push()
+    // fill('#ffff00')
+    // circle(
+    //   visibleCircle.body.position.x,
+    //   visibleCircle.body.position.y,
+    //   (visibleCircle.sizing.radius -
+    //     (movingArc.sizing.radius + player.sizing.radius * 1.825)) *
+    //     2
+    // )
+    // pop()
+
     // Collision
     if (
       player.didTouch(
@@ -43,6 +54,8 @@ function gamePlay() {
         'circle'
       )
     ) {
+      collisionTimer += 1 / frameRate()
+
       player.isStartPosition = false
 
       player.dir = p5.Vector.sub(
@@ -50,15 +63,43 @@ function gamePlay() {
         movingArc.body.position
       ).normalize()
 
-      addScore(
-        1,
-        imgLife,
-        {
-          x: player.body.position.x,
-          y: player.body.position.y,
-        },
-        4
-      )
+      if (
+        !player.didTouch(
+          {
+            sizing: {
+              radius:
+                visibleCircle.sizing.radius -
+                (movingArc.sizing.radius + player.sizing.radius * 1.825),
+            },
+            body: visibleCircle.body,
+          },
+          'circle'
+        )
+      ) {
+        if (collisionTimer > 0.22) {
+          addScore(
+            1,
+            imgLife,
+            {
+              x: player.body.position.x,
+              y: player.body.position.y,
+            },
+            4
+          )
+
+          collisionTimer = 0
+        }
+      } else {
+        addScore(
+          1,
+          imgLife,
+          {
+            x: player.body.position.x,
+            y: player.body.position.y,
+          },
+          4
+        )
+      }
     }
 
     // Manage Player movement

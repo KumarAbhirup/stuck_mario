@@ -85,6 +85,8 @@ let gameTimer
 let gameTimerEnabled = false
 let gameOverRectangleHeight = 0 // for game over animation
 
+let collisionTimer = 0
+
 let canScore = false
 
 // Size stuff
