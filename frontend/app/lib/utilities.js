@@ -76,19 +76,6 @@ function particlesEffect(
   }
 }
 
-function celebrations() {
-  addScore(
-    1,
-    imgLife,
-    {
-      x: player.body.position.x,
-      y: player.body.position.y,
-    },
-    Math.floor(random(7, 12)),
-    { floatingText: false }
-  )
-}
-
 // Used to go to submit score page
 function submitScore(currentScore) {
   window.setScore(currentScore)
@@ -102,6 +89,23 @@ function playMusic(music, volume = 0.4, loop = false) {
     music.setLoop(loop)
     music.play()
   }
+}
+
+function celebrations() {
+  addScore(
+    1,
+    imgLife,
+    {
+      x: player.body.position.x,
+      y: player.body.position.y,
+    },
+    Math.floor(random(7, 12)),
+    { floatingText: false }
+  )
+
+  sndExplosion = loadSound(Koji.config.sounds.explosion, () =>
+    playMusic(sndExplosion, 10, false)
+  )
 }
 
 function disableSound() {

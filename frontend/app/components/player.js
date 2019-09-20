@@ -1,3 +1,4 @@
+/* eslint-disable no-global-assign */
 /* eslint-disable no-unused-vars */
 /*
   global
@@ -17,6 +18,10 @@
   movingArc
   createVector
   loseLife
+  sndLostLife
+  loadSound
+  playMusic
+  Koji
 */
 
 class Player extends GameObject {
@@ -50,6 +55,10 @@ class Player extends GameObject {
       this.isRemovable = true
       this.isStartPosition = true
       this.reload()
+
+      sndLostLife = loadSound(Koji.config.sounds.life, () =>
+        playMusic(sndLostLife, 10, false)
+      )
       loseLife()
     }
   }
