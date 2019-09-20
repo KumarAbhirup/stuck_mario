@@ -36,17 +36,6 @@ function gamePlay() {
       movingArc.revolveAngle -= 6 * movingArc.moveDir
     }
 
-    // push()
-    // fill('#ffff00')
-    // circle(
-    //   visibleCircle.body.position.x,
-    //   visibleCircle.body.position.y,
-    //   (visibleCircle.sizing.radius -
-    //     (movingArc.sizing.radius + player.sizing.radius * 1.825)) *
-    //     2
-    // )
-    // pop()
-
     // Collision
     if (
       player.didTouch(
@@ -89,7 +78,7 @@ function gamePlay() {
 
           collisionTimer = 0
         }
-      } else {
+      } else if (collisionTimer > 0.01) {
         addScore(
           1,
           imgLife,
