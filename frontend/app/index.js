@@ -72,6 +72,7 @@ let sndEnd
 let sndEnemyHit
 let sndExplosion
 let sndLostLife
+let sndBounce
 
 let soundEnabled = true
 let canMute = true
@@ -142,6 +143,8 @@ function preload() {
     sndEnemyHit = loadSound(Koji.config.sounds.enemyHit)
   if (Koji.config.sounds.explosion)
     sndExplosion = loadSound(Koji.config.sounds.explosion)
+  if (Koji.config.sounds.bounce)
+    sndBounce = loadSound(Koji.config.sounds.bounce)
   if (Koji.config.sounds.life) sndLostLife = loadSound(Koji.config.sounds.life)
 
   // Load settings from Game Settings

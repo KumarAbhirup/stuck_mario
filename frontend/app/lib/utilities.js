@@ -103,8 +103,8 @@ function celebrations() {
     { floatingText: false }
   )
 
-  sndExplosion = loadSound(Koji.config.sounds.explosion, () =>
-    playMusic(sndExplosion, 10, false)
+  sndBounce = loadSound(Koji.config.sounds.bounce, () =>
+    playMusic(sndBounce, 10, false)
   )
 }
 
