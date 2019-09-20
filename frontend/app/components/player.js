@@ -50,7 +50,7 @@ class Player extends GameObject {
       this.isRemovable = true
       this.isStartPosition = true
       this.reload()
-      loseLife()
+      // loseLife()
     }
   }
 

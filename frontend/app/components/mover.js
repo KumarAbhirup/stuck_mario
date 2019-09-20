@@ -14,22 +14,21 @@ class Mover extends GameObject {
 
   revolveAngle = 90
 
+  rotateAngle = 90
+
+  rotateAngleRadian = radians(this.rotateAngle)
+
   update() {
     // set moving arc postion
     this.body.position.x =
       visibleCircle.body.position.x +
-      cos(radians(this.revolveAngle)) * visibleCircle.sizing.radius
+      cos(this.revolveAngle) * visibleCircle.sizing.radius
     this.body.position.y =
       visibleCircle.body.position.y +
-      sin(radians(this.revolveAngle)) * visibleCircle.sizing.radius
+      sin(this.revolveAngle) * visibleCircle.sizing.radius
 
-    const rotateAngle = map(
-      radians(this.revolveAngle - 90),
-      radians(0),
-      radians(360),
-      radians(0),
-      radians(360)
-    )
-    this.rotate(rotateAngle, null, 'degrees')
+    this.rotateAngle = map(this.revolveAngle - 90, 0, 360, 0, 360)
+    this.rotateAngleRadian = radians(this.rotateAngle)
+    this.rotate(this.rotateAngle, null, 'degrees')
   }
 }

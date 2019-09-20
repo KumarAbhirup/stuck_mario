@@ -172,6 +172,7 @@ class GameObject {
       ? translate(this.settings.translateWithVector)
       : null
 
+    angleMode(DEGREES)
     this.settings.rotate ? rotate(angle) : null
 
     switch (this.settings.shape) {

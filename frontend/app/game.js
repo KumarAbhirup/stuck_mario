@@ -30,12 +30,19 @@ function gamePlay() {
 
     // Collision
     if (
-      player.didTouch(
+      collideCircleWithRotatedRectangle(
         {
-          sizing: movingArc.sizing,
-          body: movingArc.body,
+          x: player.body.position.x,
+          y: player.body.position.y,
+          radius: player.sizing.radius,
         },
-        'rectangle'
+        {
+          x: movingArc.body.position.x,
+          y: movingArc.body.position.y,
+          width: movingArc.sizing.width,
+          height: movingArc.sizing.height,
+          rotation: movingArc.rotateAngleRadian,
+        }
       )
     ) {
       player.isStartPosition = false
