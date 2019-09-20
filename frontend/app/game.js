@@ -26,7 +26,11 @@ function gamePlay() {
   movingArc.update()
 
   if (gameStart) {
-    movingArc.revolveAngle -= 3.5 * movingArc.moveDir
+    if (isMobile) {
+      movingArc.revolveAngle = map(mouseX, 10, width - 10, 0, 360)
+    } else {
+      movingArc.revolveAngle -= 3.5 * movingArc.moveDir
+    }
 
     // Collision
     if (
