@@ -8,7 +8,8 @@
     "mobile_instructions1": "Let the Mario be in that Circle forever!",
     "mobile_instructions2": "Bounce back Mario by moving the arc of the circle.",
     "mobile_instructions3": "Drag to move the arc.",
-    "lives": "3",
+    "deskLives": "3",
+    "mobileLives": "5",
     "minimumScoreToSave": "2",
     "enableCursor": true,
     "enableTimer": false,
@@ -73,9 +74,15 @@
         "type": "text"
       },
       {
-        "key": "lives",
+        "key": "deskLives",
         "name": "Starting Lives",
-        "description": "How many lives you initially have",
+        "description": "How many lives you initially have on DESKTOP",
+        "type": "text"
+      },
+      {
+        "key": "mobileLives",
+        "name": "Starting Lives",
+        "description": "How many lives you initially have on MOBILE",
         "type": "text"
       },
       {

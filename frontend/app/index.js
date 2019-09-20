@@ -87,6 +87,8 @@ let isMobile = false // check if it really is mobile
 let isMobileSize = false // check if the browser is mobile size
 let touching = false // Whether the user is currently touching/clicking
 
+let gameButtons
+
 // Load assets
 function preload() {
   // Load font from google fonts link provided in game settings
@@ -212,9 +214,16 @@ function setup() {
   soundButton = new SoundButton()
   leaderboardButton = new LeaderboardButton()
   endButton = new EndButton()
+  gameButtons = [
+    new ArcMoveButton(-1, width / 2 - objSize * 2),
+    new ArcMoveButton(+1, width / 2 + objSize * 2),
+  ]
 
   instantiate()
 
+  startingLives = isMobile
+    ? parseInt(Koji.config.strings.mobileLives)
+    : parseInt(Koji.config.strings.deskLives)
   gameBeginning = true
 
   /**

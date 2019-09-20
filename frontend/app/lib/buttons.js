@@ -144,6 +144,60 @@ class EndButton {
   }
 }
 
+class ArcMoveButton {
+  constructor(moveDir, x = 0, y = 0, thisWidth = 0, thisHeight = 0) {
+    this.btn = new Clickable()
+    this.btn.textSize = floor(objSize * 0.9)
+    this.btn.text = moveDir === 1 ? '👉' : '👈'
+    this.btn.textColor = Koji.config.colors.buttonTextColor
+    this.moveDir = moveDir
+    this.x = x
+
+    this.size = createVector(this.btn.textWidth * 1.5, this.btn.textSize * 3)
+    this.pos = createVector(x - objSize * 0.9, height - objSize * 3)
+
+    if (this.size.y > width) {
+      this.size.y = width
+    }
+
+    this.btn.resize(this.size.x, this.size.y)
+
+    this.btn.strokeWeight = 0
+
+    this.btn.onHover = function() {
+      this.color = Koji.config.colors.buttonHoverColor
+    }
+
+    this.btn.onOutside = function() {
+      this.color = Koji.config.colors.buttonColor
+    }
+
+    this.btn.onPress = function() {
+      this.color = Koji.config.colors.buttonClickColor
+      movingArc.moveDir = moveDir
+    }
+
+    this.btn.onRelease = function() {
+      movingArc.moveDir = 0
+    }
+  }
+
+  update() {
+    // Resize button to fit text
+    this.btn.textSize = floor(objSize * 0.9)
+    this.size = createVector(this.btn.textWidth * 1.5, this.btn.textSize * 3)
+
+    if (this.size.y > width) {
+      this.size.y = width
+    }
+    this.btn.resize(this.size.x, this.size.y)
+
+    this.pos.x = this.x - objSize * 0.9
+    this.pos.y = height - objSize * 3
+    this.btn.locate(this.pos.x, this.pos.y)
+  }
+}
+
 class LeaderboardButton {
   constructor() {
     this.btn = new Clickable()
