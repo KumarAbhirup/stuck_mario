@@ -66,65 +66,6 @@ function rectRectColliding(rectangle1, rectangle2) {
   )
 }
 
-// function rotatedRectCircleColliding(
-//   circleX,
-//   circleY,
-//   circleRadius,
-//   rectX,
-//   rectY,
-//   rectWidth,
-//   rectHeight,
-//   rectAngle
-// ) {
-//   // Rotate circle's center point back
-//   const rectCenterX = rectX + rectWidth / 2
-//   const rectCenterY = rectY + rectHeight / 2
-
-//   const cx =
-//     Math.cos(rectAngle) * (circleX - rectCenterX) -
-//     Math.sin(rectAngle) * (circleY - rectCenterY) +
-//     rectCenterX
-//   const cy =
-//     Math.sin(rectAngle) * (circleX - rectCenterX) +
-//     Math.cos(rectAngle) * (circleY - rectCenterY) +
-//     rectCenterY
-
-//   // Closest point
-//   let x
-//   let y
-
-//   // Find the unrotated closest x point from center of unrotated circle
-//   if (cx < rectX) {
-//     x = rectX
-//   } else if (cx > rectX + rectWidth) {
-//     x = rectX + rectWidth
-//   } else {
-//     x = cx
-//   }
-
-//   // Find the unrotated closest y point from center of unrotated circle
-//   if (cy < rectY) {
-//     y = rectY
-//   } else if (cy > rectY + rectHeight) {
-//     y = rectY + rectHeight
-//   } else {
-//     y = cy
-//   }
-//   // Determine collision
-//   let collision = false
-
-//   const cRadius = circleRadius
-//   const distance = dist(cx, cy, x, y)
-
-//   if (distance < cRadius) {
-//     collision = true // Collision
-//   } else {
-//     collision = false
-//   }
-
-//   return collision
-// }
-
 function collideCircleWithRotatedRectangle(circle, rect) {
   function getDistance(fromX, fromY, toX, toY) {
     const dX = Math.abs(fromX - toX)

@@ -1,8 +1,20 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-empty */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
+
+// imports
+const {
+  Engine,
+  World,
+  Body,
+  Render,
+  MouseConstraint,
+  Mouse,
+  Constraint,
+} = Matter
 
 // Strict Stuffs (EDITING THESE WILL MAKE GAME CRASH)
 let myFont // The font we'll use throughout the app
@@ -25,6 +37,9 @@ let player
 
 // Game Stuffs (READ-N-WRITE)
 let circleRadius
+let world
+let engine
+let render
 
 // Buttons
 let playButton
@@ -168,6 +183,7 @@ function instantiate() {
       color: Koji.config.colors.arcColor,
       image: imgMoon,
       rotate: true,
+      shouldAddInWorld: false,
     }
   )
 
@@ -182,7 +198,7 @@ function instantiate() {
   player = new Player(
     { x: width / 2, y: height / 2 },
     { radius: circleRadius * 0.175 },
-    { shape: 'circle', image: imgPlayer, rotate: true }
+    { shape: 'circle', image: imgPlayer, rotate: true, shouldAddInWorld: false }
   )
 }
 
@@ -218,6 +234,12 @@ function setup() {
     new ArcMoveButton(-1, width / 2 - objSize * 2),
     new ArcMoveButton(+1, width / 2 + objSize * 2),
   ]
+
+  // Engine and World setup
+  engine = Engine.create()
+  world = engine.world
+
+  engine.world.gravity.y = 0 // 0 for no gravity, -1 for gravity to pull up, 1 for maximum gravity pulling downwards.
 
   instantiate()
 
@@ -259,6 +281,7 @@ function draw() {
     gameBeginningOver()
   } else {
     gamePlay()
+    Engine.update(engine)
   }
 
   soundButton.render()

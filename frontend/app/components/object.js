@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-const { Bodies } = Matter
+const { Bodies, World } = Matter
 
 /**
  * @class GameObject
@@ -52,12 +52,13 @@ class GameObject {
         break
     }
 
+    // add body to some array or world -> World.add(world, this.body)
+    if (this.settings.shouldAddInWorld) World.add(world, this.body)
+
     this.body.position = createVector(
       this.body.position.x,
       this.body.position.y
     )
-
-    // add body to some array or world -> World.add(world, this.body)
 
     // If the body is movable, save it to this.body for mouse constraint to understand.
     if (this.settings.movable) {
