@@ -25,10 +25,12 @@ function gamePlay() {
   player.show()
   movingArc.update()
 
+  if (isMobile) {
+    movingArc.revolveAngle = map(mouseX, 10, width - 10, 0, 360)
+  }
+
   if (gameStart) {
-    if (isMobile) {
-      movingArc.revolveAngle = map(mouseX, 10, width - 10, 0, 360)
-    } else {
+    if (!isMobile) {
       movingArc.revolveAngle -= 3.5 * movingArc.moveDir
     }
 

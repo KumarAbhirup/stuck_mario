@@ -12,7 +12,7 @@
 class Mover extends GameObject {
   moveDir = 0 // 0 not moving, -1 left, 1 for right.
 
-  revolveAngle = 90
+  revolveAngle = 45
 
   rotateAngle = 90
 
